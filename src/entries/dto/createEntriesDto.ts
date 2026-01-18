@@ -1,9 +1,11 @@
+import { Decimal } from '@prisma/client/runtime/client';
 import {
   IsNotEmpty,
   IsNumber,
   IsPositive,
   IsString,
   Matches,
+  Max,
   MaxLength,
 } from 'class-validator';
 
@@ -20,7 +22,8 @@ export class CreateEntryDto {
 
   @IsNumber({ allowNaN: false, allowInfinity: false }, { message: 'hours must be a number' })
   @IsPositive({ message: 'hours must be > 0' })
-  hours: number;
+  @Max(24)
+  hours: Decimal;
 
   @IsString()
   @IsNotEmpty()

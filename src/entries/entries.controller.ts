@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { EntriesService } from './entries.service';
 import { CreateEntryDto } from './dto/createEntriesDto';
 
@@ -9,5 +9,10 @@ export class EntriesController {
     @Post('/')
     async createNewEntry(@Body() entryData : CreateEntryDto) {
         return this.entriesService.createNewEntry(entryData);
+    }
+
+    @Get('/')
+    async getEntries() {
+        return this.entriesService.getEntries();
     }
 }
