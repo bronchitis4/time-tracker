@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Entry {
+  id   Int @id @default(autoincrement())
+  date String 
+  project String
+  hours Decimal @db.Decimal(4, 2)
+  description String @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([date])
+}
+
