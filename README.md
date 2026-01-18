@@ -1,98 +1,112 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Mini Time Tracker
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A simple time tracking application built with NestJS and Prisma.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Technologies Used
 
-## Description
+- NestJS - Progressive Node.js framework
+- TypeScript - Type-safe JavaScript
+- Prisma - Modern ORM for PostgreSQL
+- PostgreSQL - Database
+- class-validator - Request validation
+- class-transformer - Data transformation
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Project Structure
 
-## Project setup
-
-```bash
-$ npm install
+```
+mini-time-tracker/
+├── src/
+│   ├── main.ts                    # Application entry point
+│   ├── app.module.ts              # Root module
+│   ├── app.controller.ts          # Root controller
+│   ├── app.service.ts             # Root service
+│   ├── entries/                   # Time entries module
+│   │   ├── entries.module.ts      # Module definition
+│   │   ├── entries.controller.ts  # REST API endpoints
+│   │   ├── entries.service.ts     # Business logic
+│   │   ├── entries.repository.ts  # Data access layer
+│   │   └── dto/                   # Data transfer objects
+│   │       └── createEntriesDto.ts
+│   └── prisma/                    # Prisma module
+│       ├── prisma.module.ts       # Module definition
+│       └── prisma.service.ts      # Prisma client service
+├── prisma/
+│   ├── schema.prisma              # Database schema
+│   └── migrations/                # Database migrations
+├── test/                          # E2E tests
+├── package.json
+└── README.md
 ```
 
-## Compile and run the project
+## Getting Started
 
+### Prerequisites
+
+- Node.js (v18 or higher)
+- PostgreSQL database
+
+### Installation
+
+1. Install dependencies:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+2. Set up environment variables:
+Create a `.env` file in the root directory:
+```
+DATABASE_URL="postgresql://user:password@localhost:5432/mini_time_tracker"
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+3. Set up the database:
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npx prisma migrate dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+4. Generate Prisma client:
+```bash
+npx prisma generate
+```
 
-## Resources
+### Running the Application
 
-Check out a few resources that may come in handy when working with NestJS:
+Development mode with hot-reload:
+```bash
+npm run start:dev
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Production mode:
+```bash
+npm run build
+npm run start:prod
+```
 
-## Support
+The API will be available at `http://localhost:3000`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Available Scripts
 
-## Stay in touch
+- `npm run start` - Start the application
+- `npm run start:dev` - Start in watch mode
+- `npm run start:prod` - Start in production mode
+- `npm run build` - Build the application
+- `npm run test` - Run unit tests
+- `npm run test:e2e` - Run end-to-end tests
+- `npm run lint` - Lint the codebase
+- `npx prisma studio` - Open Prisma Studio for database management
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## API Endpoints
 
-## License
+### Entries
+- `POST /entries` - Create a new time entry
+- `GET /entries` - Get all time entries
+- Additional endpoints as per implementation
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Database Schema
+
+The application uses a single `Entry` table with the following fields:
+- `id` - Auto-incrementing integer
+- `date` - Entry date (string)
+- `project` - Project name
+- `hours` - Hours worked (decimal)
+- `description` - Entry description
+- `createdAt` - Timestamp of creation
